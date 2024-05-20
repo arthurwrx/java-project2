@@ -28,11 +28,11 @@ public class Notificacao {
     public Notificacao() {
     }
 
-    public Integer getId_notiificacao() {
+    public Integer getId_notificacao() {
         return id_notificacao;
     }
 
-    public Notificacao setId_notiificacao(Integer id_notificacao) {
+    public Notificacao setId_notificacao(Integer id_notificacao) {
         this.id_notificacao = id_notificacao;
         return this;
     }

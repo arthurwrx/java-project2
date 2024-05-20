@@ -1,7 +1,8 @@
 package br.com.fiap.project.model;
 
 import jakarta.persistence.*;
-import oracle.sql.TIMESTAMP;
+
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "TB_LOG_NOTIFICACOES")
@@ -10,7 +11,7 @@ public class LogNotificacoes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_log;
     private String tipo_operacao;
-    private TIMESTAMP data_hora;
+    private Timestamp data_hora;
 
     @OneToOne
     private Notificacao notificacao;
@@ -36,11 +37,11 @@ public class LogNotificacoes {
         return this;
     }
 
-    public TIMESTAMP getData_hora() {
+    public Timestamp getData_hora() {
         return data_hora;
     }
 
-    public LogNotificacoes setData_hora(TIMESTAMP data_hora) {
+    public LogNotificacoes setData_hora(Timestamp data_hora) {
         this.data_hora = data_hora;
         return this;
     }

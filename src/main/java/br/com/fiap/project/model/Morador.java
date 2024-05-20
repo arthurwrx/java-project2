@@ -7,13 +7,10 @@ import jakarta.persistence.*;
     public class Morador {
 
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Integer id_morador;
         private String nome;
         private String endereco;
         private String email;
-
-
 
         public Morador() {}
 
