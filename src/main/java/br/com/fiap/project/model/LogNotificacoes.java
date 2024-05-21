@@ -8,12 +8,12 @@ import java.sql.Timestamp;
 @Table(name = "TB_LOG_NOTIFICACOES")
 public class LogNotificacoes {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_log;
     private String tipo_operacao;
     private Timestamp data_hora;
 
     @OneToOne
+    @JoinColumn(name = "id_notificacao")
     private Notificacao notificacao;
 
     public LogNotificacoes() {
@@ -43,6 +43,15 @@ public class LogNotificacoes {
 
     public LogNotificacoes setData_hora(Timestamp data_hora) {
         this.data_hora = data_hora;
+        return this;
+    }
+
+    public Notificacao getNotificacao() {
+        return notificacao;
+    }
+
+    public LogNotificacoes setNotificacao(Notificacao notificacao) {
+        this.notificacao = notificacao;
         return this;
     }
 }

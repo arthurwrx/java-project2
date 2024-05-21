@@ -32,9 +32,7 @@ public class NotificacaoService {
         return null;
     }
 
-    public void deleteNotificacao(Integer id_notificacao) {
-        notificacaoRepository.deleteById(id_notificacao);
-    }
+    public void deleteNotificacao(Integer id_notificacao) {notificacaoRepository.deleteById(id_notificacao);}
     public boolean existsById(Integer id_notificacao) {return notificacaoRepository.existsById(id_notificacao);}
 }
 

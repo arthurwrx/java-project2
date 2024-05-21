@@ -5,6 +5,7 @@ import br.com.fiap.project.model.TipoResiduos;
 import br.com.fiap.project.service.TipoResiduosService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -55,11 +56,12 @@ public class TipoResiduosController {
     }
 
     @DeleteMapping("/{id_tipo_residuos}")
-    public ResponseEntity<Void> deleteTipoResiduos(@PathVariable Integer id_tipo_residuos) {
-        if (!tipoResiduosService.existsById(id_tipo_residuos)) {
-            throw new ResourceNotFoundException("Nenhum tipo de residuo foi encontrado com o id: " + id_tipo_residuos);
+    public ResponseEntity<String> deleteTipoResiduos(@PathVariable Integer id_log) {
+        if (tipoResiduosService.existsById(id_log)) {
+            tipoResiduosService.deleteTipoResiduos(id_log);
+            return ResponseEntity.ok("Log deletado com sucesso.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Log com o ID " + id_log + " não foi encontrado.");
         }
-        tipoResiduosService.deleteTipoResiduos(id_tipo_residuos);
-        return ResponseEntity.noContent().build();
     }
 }

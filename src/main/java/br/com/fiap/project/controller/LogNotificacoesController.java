@@ -5,6 +5,7 @@ import br.com.fiap.project.model.LogNotificacoes;
 import br.com.fiap.project.service.LogNotificacoesService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -55,11 +56,12 @@ public class LogNotificacoesController {
     }
 
     @DeleteMapping("/{id_log}")
-    public ResponseEntity<Void> deleteLogNotificacoes(@PathVariable Integer id_log) {
-        if (!logNotificacoesService.existsById(id_log)) {
-            throw new ResourceNotFoundException("Não foi encontrado nenhum log com o id: " + id_log);
+    public ResponseEntity<String> deleteLogNotificacoes(@PathVariable Integer id_log) {
+        if (logNotificacoesService.existsById(id_log)) {
+            logNotificacoesService.deleteLogNotificacoes(id_log);
+            return ResponseEntity.ok("Log deletado com sucesso.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Log com o ID " + id_log + " não foi encontrado.");
         }
-        logNotificacoesService.deleteLogNotificacoes(id_log);
-        return ResponseEntity.noContent().build();
     }
 }

@@ -11,7 +11,6 @@ import java.time.LocalDate;
 @Table(name = "TB_DIA_COLETA")
 public class DiaColeta {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_dia_coleta;
     private LocalDate data_hora;
     private String bairro;

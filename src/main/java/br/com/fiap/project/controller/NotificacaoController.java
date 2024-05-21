@@ -5,6 +5,7 @@ import br.com.fiap.project.model.Notificacao;
 import br.com.fiap.project.service.NotificacaoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -55,11 +56,12 @@ public class NotificacaoController {
     }
 
     @DeleteMapping("/{id_notificacao}")
-    public ResponseEntity<Void> deleteNotificacao(@PathVariable Integer id_notificacao) {
-        if (!notificacaoService.existsById(id_notificacao)) {
-            throw new ResourceNotFoundException("Nenhuma notificação encontrada com o id: " + id_notificacao);
+    public ResponseEntity<String> deleteNotificacao(@PathVariable Integer id_notificacao) {
+        if (notificacaoService.existsById(id_notificacao)) {
+            notificacaoService.deleteNotificacao(id_notificacao);
+            return ResponseEntity.ok("Notificação deletada com sucesso.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Notificação com o ID " + id_notificacao + " não foi encontrada.");
         }
-        notificacaoService.deleteNotificacao(id_notificacao);
-        return ResponseEntity.noContent().build();
     }
 }

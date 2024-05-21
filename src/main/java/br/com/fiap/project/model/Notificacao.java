@@ -7,7 +7,6 @@ import java.util.Date;
 @Table(name = "TB_NOTIFICACAO")
 public class Notificacao {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_notificacao;
     private String email;
     private String mensagem;

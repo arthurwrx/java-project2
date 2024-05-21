@@ -57,11 +57,12 @@ public class DiaColetaController {
     }
 
     @DeleteMapping("/{id_dia_coleta}")
-    public ResponseEntity<Void> deleteDiaColeta(@PathVariable Integer id_dia_coleta) {
-        if (!diaColetaService.existsById(id_dia_coleta)) {
-            throw new ResourceNotFoundException("Dia de coleta não encontrada, o id " + id_dia_coleta + " está incorreto");
+    public ResponseEntity<String> deleteDiaColeta(@PathVariable Integer id_dia_coleta) {
+        if (diaColetaService.existsById(id_dia_coleta)) {
+            diaColetaService.deleteDiaColeta(id_dia_coleta);
+            return ResponseEntity.ok("Dia de coleta deletado com sucesso.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dia da coleta com o ID " + id_dia_coleta + " não foi encontrado.");
         }
-        diaColetaService.deleteDiaColeta(id_dia_coleta);
-        return ResponseEntity.noContent().build();
     }
 }

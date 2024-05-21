@@ -15,13 +15,6 @@ public class LogNotificacoesService {
     @Autowired
     private LogNotificacoesRepository logNotificacoesRepository;
 
-    public void createLog(String tipoOperacao, String tabela) {
-        LogNotificacoes log = new LogNotificacoes();
-        log.setTipo_operacao(tipoOperacao);
-        log.setData_hora(Timestamp.valueOf(LocalDateTime.now()));
-        logNotificacoesRepository.save(log);
-    }
-
     public List<LogNotificacoes> getAllLogNotificacoes() {
         return logNotificacoesRepository.findAll();
     }
