@@ -5,6 +5,7 @@ import br.com.fiap.project.model.LogNotificacoes;
 import br.com.fiap.project.service.LogNotificacoesService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,16 @@ public class LogNotificacoesController {
 
     @Autowired
     private LogNotificacoesService logNotificacoesService;
+
+    @Autowired
+    private Environment environment;
+
+    @GetMapping("/porta")
+    public ResponseEntity<String> exibirPorta() {
+        String porta = environment.getProperty("local.server.port");
+        String mensagem = String.format("PORTA UTILIZADA NA REQUISIÇÃO: %s", porta);
+        return ResponseEntity.ok(mensagem);
+    }
 
     @GetMapping
     public ResponseEntity<List<LogNotificacoes>> getAllLogNotificacoes() {

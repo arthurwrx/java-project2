@@ -3,11 +3,10 @@ package br.com.fiap.project.controller;
 
 import br.com.fiap.project.exception.ResourceNotFoundException;
 import br.com.fiap.project.model.Morador;
-import br.com.fiap.project.repository.MoradorRepository;
 import br.com.fiap.project.service.MoradorService;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -22,6 +21,16 @@ public class MoradorController {
 
     @Autowired
     private MoradorService moradorService;
+
+    @Autowired
+    private Environment environment;
+
+    @GetMapping("/porta")
+    public ResponseEntity<String> exibirPorta() {
+        String porta = environment.getProperty("local.server.port");
+        String mensagem = String.format("PORTA UTILIZADA NA REQUISIÇÃO: %s", porta);
+        return ResponseEntity.ok(mensagem);
+    }
 
     @GetMapping
     public ResponseEntity<List<Morador>> getAllMoradores() {
