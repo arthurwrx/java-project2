@@ -7,7 +7,7 @@ import java.util.Date;
 @Table(name = "TB_NOTIFICACAO")
 public class Notificacao {
     @Id
-    private Integer id_notificacao;
+    private Long id_notificacao;
     private String email;
     private String mensagem;
     private String status;
@@ -27,11 +27,11 @@ public class Notificacao {
     public Notificacao() {
     }
 
-    public Integer getId_notificacao() {
+    public Long getId_notificacao() {
         return id_notificacao;
     }
 
-    public Notificacao setId_notificacao(Integer id_notificacao) {
+    public Notificacao setId_notificacao(Long id_notificacao) {
         this.id_notificacao = id_notificacao;
         return this;
     }
