@@ -20,15 +20,6 @@ public class DiaColetaController {
     @Autowired
     private DiaColetaService diaColetaService;
 
-    @Autowired
-    private Environment environment;
-
-    @GetMapping("/porta")
-    public ResponseEntity<String> exibirPorta() {
-        String porta = environment.getProperty("local.server.port");
-        String mensagem = String.format("PORTA UTILIZADA NA REQUISIÇÃO: %s", porta);
-        return ResponseEntity.ok(mensagem);
-    }
 
     @GetMapping
     public ResponseEntity<List<DiaColeta>> getAllDiasColeta() {

@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @FeignClient("notificacao")
 public interface NotificacaoClient {
-    @RequestMapping(method = RequestMethod.PUT, value = "/notificacao/{id}")
-    void atualizaNotificacao(@PathVariable Long id);
 
+    @RequestMapping(method = RequestMethod.PUT, value = "/{id_notificacao}/tipostatus")
+    void atualizaStatusNotificacao(@PathVariable("id_notificacao") Long id_notificacao);
 }
+

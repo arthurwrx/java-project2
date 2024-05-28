@@ -25,9 +25,9 @@ public class NotificacaoController {
     @Autowired
     private Environment environment;
 
-    @PatchMapping("/{id}/notificacao")
-    public void atualizarStatus(@PathVariable @NotNull Long id_notificacao) throws NotificacaoNaoEncontradaException {
-        notificacaoService.atualizarStatus(id_notificacao);
+    @PatchMapping("/{id_notificacao}/tipostatus")
+    public void atualizaStatusNotificacao(@PathVariable @NotNull Long id_notificacao) throws NotificacaoNaoEncontradaException{
+        notificacaoService.atualizaStatusNotificacao(id_notificacao);
     }
 
     @GetMapping("/porta")

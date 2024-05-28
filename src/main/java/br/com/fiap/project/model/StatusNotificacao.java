@@ -1,5 +1,6 @@
 package br.com.fiap.project.model;
 
-public enum StatusEntrega {
+
+public enum StatusNotificacao {
     AGENDADO, A_CAMINHO, COLETADO
 }

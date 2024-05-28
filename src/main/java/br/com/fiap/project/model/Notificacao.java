@@ -58,7 +58,11 @@ public class Notificacao {
         return status;
     }
 
-    public Notificacao setStatus(String status) {
+//    public Pedido setStatusEntrega(StatusEntrega statusEntrega) {
+//        this.statusEntrega = statusEntrega;
+//        return this;
+
+    public Notificacao setStatusNotificacao(StatusNotificacao statusNotificacao) {
         this.status = status;
         return this;
     }

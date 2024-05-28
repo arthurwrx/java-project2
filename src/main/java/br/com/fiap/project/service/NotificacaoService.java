@@ -14,22 +14,20 @@ public class NotificacaoService {
 
     @Autowired
     private NotificacaoRepository notificacaoRepository;
-
     @Autowired
     private NotificacaoClient notificacaoClient;
 
-    public void atualizarStatus(Long id_notificacao) throws NotificacaoNaoEncontradaException {
+    public void atualizaStatusNotificacao(Long id_notificacao) throws NotificacaoNaoEncontradaException {
         Optional<Notificacao> notificacaoOptional = notificacaoRepository.findById(id_notificacao);
 
-        if (notificacaoOptional.isPresent()){
-            notificacaoOptional.get().setStatus(String.valueOf(StatusEntrega.A_CAMINHO));
+        if (notificacaoOptional.isPresent()) {
+            notificacaoOptional.get().setStatusNotificacao(StatusNotificacao.A_CAMINHO);
             notificacaoRepository.save(notificacaoOptional.get());
-            notificacaoClient.atualizaNotificacao(notificacaoOptional.get().getId_notificacao());
+            notificacaoClient.atualizaStatusNotificacao(notificacaoOptional.get().getId_notificacao());
         } else {
-            throw new NotificacaoNaoEncontradaException(String.format("Pedido não encontrado"));
+            throw new NotificacaoNaoEncontradaException(String.format("Notificação não encontrada"));
         }
     }
-
     public List<Notificacao> getAllNotificacoes() {
         return notificacaoRepository.findAll();
     }

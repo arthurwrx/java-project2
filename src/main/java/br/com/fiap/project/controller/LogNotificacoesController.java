@@ -20,15 +20,6 @@ public class LogNotificacoesController {
     @Autowired
     private LogNotificacoesService logNotificacoesService;
 
-    @Autowired
-    private Environment environment;
-
-    @GetMapping("/porta")
-    public ResponseEntity<String> exibirPorta() {
-        String porta = environment.getProperty("local.server.port");
-        String mensagem = String.format("PORTA UTILIZADA NA REQUISIÇÃO: %s", porta);
-        return ResponseEntity.ok(mensagem);
-    }
 
     @GetMapping
     public ResponseEntity<List<LogNotificacoes>> getAllLogNotificacoes() {
