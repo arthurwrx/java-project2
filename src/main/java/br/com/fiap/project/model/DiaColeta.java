@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class DiaColeta {
     @Id
     private Integer id_dia_coleta;
-    private LocalDate data_hora;
+    private String data_hora;
     private String bairro;
 
     public DiaColeta() {
@@ -26,11 +26,11 @@ public class DiaColeta {
         this.id_dia_coleta = id_dia_coleta;
     }
 
-    public LocalDate getData_hora() {
+    public String getData_hora() {
         return data_hora;
     }
 
-    public void setData_hora(LocalDate data_hora) {
+    public void setData_hora(String data_hora) {
         this.data_hora = data_hora;
     }
 
