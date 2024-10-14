@@ -54,8 +54,8 @@ jobs:
 
       - name: Build and push Docker image for staging
         run: |
-          docker build -t your-dockerhub-username/java_project:staging .
-          docker push your-dockerhub-username/java_project:staging
+          docker build -t arthurwrx/java-project:staging .
+          docker push arthurwrx/java-project:staging
 
   deploy:
     needs: dockerize
@@ -65,13 +65,10 @@ jobs:
       - name: Deploy to Staging
         run: |
           echo "Deploying to Staging environment"
-          # Aqui você colocaria seu script de deployment (Ex: Docker Compose, Kubernetes)
-          # Exemplo para Docker Compose:
-          # docker-compose -f docker-compose.staging.yml up -d
+          docker-compose -f docker-compose.staging.yml up -d
 
       - name: Deploy to Production
         if: github.ref == 'refs/heads/master'  # Apenas quando for um push na branch 'master'
         run: |
           echo "Deploying to Production environment"
-          # Exemplo para Production:
-          # docker-compose -f docker-compose.production.yml up -d
+          docker-compose -f docker-compose.production.yml up -d
