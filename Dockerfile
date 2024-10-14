@@ -1,11 +1,11 @@
 # Etapa 1: Usar uma imagem base que contém o Maven e o JDK 21
-FROM maven:3.9.4-openjdk-21 AS build
+FROM maven:3.9.9-openjdk-21-slim AS build
 
 # Definir o diretório de trabalho dentro do container
 WORKDIR /app
 
 # Copiar o arquivo pom.xml e baixar as dependências do Maven
-COPY pom.xml ./
+COPY pom.xml . 
 
 # Baixar as dependências sem construir o projeto
 RUN mvn dependency:go-offline
