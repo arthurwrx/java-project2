@@ -4,6 +4,6 @@ services:
   app:
     image: arthurwrx/java-project:staging
     ports:
-      - "8080:8080"  # Mapeia a porta 8080 do contêiner para a porta 8080 do host
+      - "4040:4040"  # Mapeia a porta 8080 do contêiner para a porta 8080 do host
     environment:
       SPRING_PROFILES_ACTIVE: staging  # Configura o perfil do Spring para staging
