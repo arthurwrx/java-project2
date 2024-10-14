@@ -1,5 +1,5 @@
-# Etapa 1: Usar uma imagem base que contém o Maven e o JDK 21
-FROM maven:3.9.8-eclipse-temurin-21 AS build
+# Etapa 1: Usar uma imagem base que contém o Maven 3.9.8 e o JDK 17
+FROM maven:3.9.8-eclipse-temurin-17 AS build
 
 # Definir o diretório de trabalho dentro do container
 WORKDIR /app
