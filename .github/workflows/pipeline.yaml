@@ -68,7 +68,7 @@ jobs:
           docker-compose -f docker-compose.staging.yml up -d
 
       - name: Deploy to Production
-        if: github.ref == 'refs/heads/master'  # Apenas quando for um push na branch 'master'
+        if: github.ref == 'refs/heads/master'  # Apenas quando for um push na branch 'master'dsdasdada
         run: |
           echo "Deploying to Production environment"
-          docker-compose -f docker-compose.production.yml up -d
+          docker-compose -f docker-compose.production.yml up -d 
