@@ -73,10 +73,10 @@ jobs:
       - name: Deploy to Staging
         run: |
           echo "Deploying to Staging environment"
-          docker-compose -f docker-compose.staging.yml up -d
+          docker compose -f docker-compose.staging.yml up -d
 
       - name: Deploy to Production
 
         run: |
           echo "Deploying to Production environment"
-          docker-compose -f docker-compose.production.yml up -d
+          docker compose -f docker-compose.production.yml up -d
