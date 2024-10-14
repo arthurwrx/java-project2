@@ -5,10 +5,10 @@ import br.com.fiap.project.model.DiaColeta;
 import br.com.fiap.project.service.DiaColetaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +19,6 @@ public class DiaColetaController {
 
     @Autowired
     private DiaColetaService diaColetaService;
-
 
     @GetMapping
     public ResponseEntity<List<DiaColeta>> getAllDiasColeta() {

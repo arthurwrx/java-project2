@@ -1,38 +1,22 @@
 package br.com.fiap.project.service;
 
-import br.com.fiap.project.exception.NotificacaoNaoEncontradaException;
-import br.com.fiap.project.http.NotificacaoClient;
 import br.com.fiap.project.model.*;
 import br.com.fiap.project.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class NotificacaoService {
 
     @Autowired
     private NotificacaoRepository notificacaoRepository;
-    @Autowired
-    private NotificacaoClient notificacaoClient;
 
-    public void atualizaStatusNotificacao(Long id_notificacao) throws NotificacaoNaoEncontradaException {
-        Optional<Notificacao> notificacaoOptional = notificacaoRepository.findById(id_notificacao);
-
-        if (notificacaoOptional.isPresent()) {
-            notificacaoOptional.get().setStatusNotificacao(StatusNotificacao.A_CAMINHO);
-            notificacaoRepository.save(notificacaoOptional.get());
-            notificacaoClient.atualizaStatusNotificacao(notificacaoOptional.get().getId_notificacao());
-        } else {
-            throw new NotificacaoNaoEncontradaException(String.format("Notificação não encontrada"));
-        }
-    }
     public List<Notificacao> getAllNotificacoes() {
         return notificacaoRepository.findAll();
     }
 
-    public Notificacao getNotificacaoById(Long id_notificacao) {
+    public Notificacao getNotificacaoById(Integer id_notificacao) {
         return notificacaoRepository.findById(id_notificacao).orElse(null);
     }
 
@@ -40,7 +24,7 @@ public class NotificacaoService {
         return notificacaoRepository.save(notificacao);
     }
 
-    public Notificacao updateNotificacao(Long id_notificacao, Notificacao notificacao) {
+    public Notificacao updateNotificacao(Integer id_notificacao, Notificacao notificacao) {
         if (notificacaoRepository.existsById(id_notificacao)) {
             notificacao.setId_notificacao(id_notificacao);
             return notificacaoRepository.save(notificacao);
@@ -48,7 +32,7 @@ public class NotificacaoService {
         return null;
     }
 
-    public void deleteNotificacao(Long id_notificacao) {notificacaoRepository.deleteById(id_notificacao);}
-    public boolean existsById(Long id_notificacao) {return notificacaoRepository.existsById(id_notificacao);}
+    public void deleteNotificacao(Integer id_notificacao) {notificacaoRepository.deleteById(id_notificacao);}
+    public boolean existsById(Integer id_notificacao) {return notificacaoRepository.existsById(id_notificacao);}
 }
 
