@@ -1,31 +1,23 @@
-# Etapa 1: Usar uma imagem base que contém o Maven 3.9.8 e o JDK 17
+# Etapa 1: Usar uma imagem base que contém o Maven e o JDK 17
 FROM maven:3.9.8-eclipse-temurin-17 AS build
 
-# Definir o diretório de trabalho dentro do container
+# Copiar o pom.xml e o código fonte para a imagem
+COPY pom.xml /app/pom.xml
+COPY src /app/src
+
+# Mudar o diretório de trabalho
 WORKDIR /app
-
-# Copiar o arquivo pom.xml e baixar as dependências do Maven
-COPY pom.xml ./
-
-# Baixar as dependências sem construir o projeto
-RUN mvn dependency:go-offline
-
-# Copiar todo o código do projeto para dentro do container
-COPY src ./src
 
 # Compilar o projeto
-RUN mvn clean package -DskipTests
+RUN mvn clean package
 
-# Etapa 2: Construir a imagem final
-FROM openjdk:21-jdk-slim
+# Etapa 2: Usar uma imagem JDK 17 para rodar a aplicação
+FROM eclipse-temurin:17-jdk
 
-# Definir o diretório de trabalho para a etapa final
-WORKDIR /app
-
-# Copiar o arquivo JAR gerado na etapa de build para a imagem final
+# Copiar o JAR gerado da etapa anterior
 COPY --from=build /app/target/Java_Project-1.0-SNAPSHOT.jar /app/app.jar
 
-# Expor a porta em que a aplicação irá rodar (exemplo: porta 8080)
+# Expor a porta que a aplicação usa
 EXPOSE 8080
 
 # Comando para rodar a aplicação
