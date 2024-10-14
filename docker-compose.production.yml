@@ -2,8 +2,8 @@ version: '3.8'
 
 services:
   app:
-    image: arthurwrx/java-project:latest  # Certifique-se de usar a tag correta
+    image: arthurwrx/java-project:staging  # Mude esta linha
     ports:
-      - "80:8080"  # Mapeia a porta 8080 do contêiner para a porta 80 do host
+      - "8080:8080"
     environment:
-      SPRING_PROFILES_ACTIVE: production  # Configura o perfil do Spring para produção
+      SPRING_PROFILES_ACTIVE: production  # Se quiser, altere o perfil para produção
