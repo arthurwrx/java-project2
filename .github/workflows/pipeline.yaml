@@ -49,8 +49,8 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
-          username: ${{arthurwrx}}
-          password: ${{dckr_pat_WXasBRYFOI5HP-M6pPg8spPGkow}}
+          username: ${{ secrets.DOCKER_USERNAME }}  # Isso será substituído por 'arthurwrx'
+          password: ${{ secrets.DOCKER_TOKEN }}      # Isso será substituído pelo seu token
 
       - name: Build and push Docker image for staging
         run: |
