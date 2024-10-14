@@ -1,5 +1,5 @@
 # Etapa 1: Usar uma imagem base que contém o Maven e o JDK 21
-FROM maven:3.8.7-openjdk-21-slim AS build
+FROM maven:3.9.4-openjdk-21 AS build
 
 # Definir o diretório de trabalho dentro do container
 WORKDIR /app
