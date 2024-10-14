@@ -3,10 +3,10 @@ name: CI/CD Pipeline for Java Spring Boot
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   build:
@@ -70,7 +70,7 @@ jobs:
           # docker-compose -f docker-compose.staging.yml up -d
 
       - name: Deploy to Production
-        if: github.ref == 'refs/heads/main'  # Apenas quando for um push na branch 'main'
+        if: github.ref == 'refs/heads/master'  # Apenas quando for um push na branch 'master'
         run: |
           echo "Deploying to Production environment"
           # Exemplo para Production:
