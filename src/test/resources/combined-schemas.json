@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Morador": {
+      "type": "object",
+      "properties": {
+        "id_morador": { "type": "integer" },
+        "nome": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "endereco": { "type": "string" }
+      },
+      "required": ["id_morador", "nome", "email", "endereco"]
+    },
+    "DiaColeta": {
+      "type": "object",
+      "properties": {
+        "id_dia_coleta": { "type": "integer" },
+        "data": { "type": "string", "format": "date" },
+        "residuo": { "type": "string" },
+        "quantidade": { "type": "number" }
+      },
+      "required": ["id_dia_coleta", "data", "residuo", "quantidade"]
+    },
+    "LogNotificacoes": {
+      "type": "object",
+      "properties": {
+        "id_log": { "type": "integer" },
+        "data_envio": { "type": "string", "format": "date-time" },
+        "mensagem": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["id_log", "data_envio", "mensagem", "status"]
+    },
+    "Notificacao": {
+      "type": "object",
+      "properties": {
+        "id_notificacao": { "type": "integer" },
+        "titulo": { "type": "string" },
+        "conteudo": { "type": "string" },
+        "data_criacao": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id_notificacao", "titulo", "conteudo", "data_criacao"]
+    },
+    "TipoResiduos": {
+      "type": "object",
+      "properties": {
+        "id_tipo_residuos": { "type": "integer" },
+        "descricao": { "type": "string" },
+        "categoria": { "type": "string" }
+      },
+      "required": ["id_tipo_residuos", "descricao", "categoria"]
+    }
+  }
+}

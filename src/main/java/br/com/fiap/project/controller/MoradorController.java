@@ -1,6 +1,5 @@
 package br.com.fiap.project.controller;
 
-
 import br.com.fiap.project.exception.ResourceNotFoundException;
 import br.com.fiap.project.model.Morador;
 import br.com.fiap.project.repository.MoradorRepository;
@@ -26,6 +25,9 @@ public class MoradorController {
     @GetMapping
     public ResponseEntity<List<Morador>> getAllMoradores() {
         List<Morador> moradores = moradorService.getAllMoradores();
+        if (moradores.isEmpty()) {
+            throw new ResourceNotFoundException("Não foi possivel encontrar uma lista de moradores, verifique a URL!");
+        }
         return ResponseEntity.ok(moradores);
     }
 
@@ -43,9 +45,10 @@ public class MoradorController {
         if (result.hasErrors()) {
             return ResponseEntity.badRequest().body(result.getAllErrors());
         }
-        Morador createdMorador = moradorService.createMorador(morador);
-        return ResponseEntity.ok(createdMorador);
+        moradorService.createMorador(morador);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Morador criado com sucesso!");
     }
+
 
     @PutMapping("/{id_morador}")
     public ResponseEntity<?> updateMorador(@PathVariable Integer id_morador, @Valid @RequestBody Morador morador, BindingResult result) {
@@ -54,7 +57,7 @@ public class MoradorController {
         }
         Morador updatedMorador = moradorService.updateMorador(id_morador, morador);
         if (updatedMorador == null) {
-            throw new ResourceNotFoundException("Não foi possivel encontrar um morador com o id: " + id_morador);
+            throw new ResourceNotFoundException("Não foi possivel alterar as informações do morador, verifique os dados!");
         }
         return ResponseEntity.ok(updatedMorador);
     }

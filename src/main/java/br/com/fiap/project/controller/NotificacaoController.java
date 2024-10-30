@@ -22,7 +22,10 @@ public class NotificacaoController {
     @GetMapping
     public ResponseEntity<List<Notificacao>> getAllNotificacoes() {
         List<Notificacao> notificacoes = notificacaoService.getAllNotificacoes();
-        return ResponseEntity.ok(notificacoes);
+        if (notificacoes == null || notificacoes.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); // Retorna 204 se a lista estiver vazia
+        }
+        return ResponseEntity.ok(notificacoes); // Retorna 200 com a lista de notificações
     }
 
     @GetMapping("/{id_notificacao}")
@@ -31,37 +34,37 @@ public class NotificacaoController {
         if (notificacao == null) {
             throw new ResourceNotFoundException("Nenhuma notificação encontrada com o id: " + id_notificacao);
         }
-        return ResponseEntity.ok(notificacao);
+        return ResponseEntity.ok(notificacao); // Retorna 200 com a notificação encontrada
     }
 
     @PostMapping
     public ResponseEntity<?> createNotificacao(@Valid @RequestBody Notificacao notificacao, BindingResult result) {
         if (result.hasErrors()) {
-            return ResponseEntity.badRequest().body(result.getAllErrors());
+            return ResponseEntity.badRequest().body(result.getAllErrors()); // Retorna 400 se houver erros de validação
         }
         Notificacao createdNotificacao = notificacaoService.createNotificacao(notificacao);
-        return ResponseEntity.ok(createdNotificacao);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdNotificacao); // Retorna 201 com o recurso criado
     }
 
     @PutMapping("/{id_notificacao}")
     public ResponseEntity<?> updateNotificacao(@PathVariable Integer id_notificacao, @Valid @RequestBody Notificacao notificacao, BindingResult result) {
         if (result.hasErrors()) {
-            return ResponseEntity.badRequest().body(result.getAllErrors());
+            return ResponseEntity.badRequest().body(result.getAllErrors()); // Retorna 400 em caso de erros de validação
         }
         Notificacao updatedNotificacao = notificacaoService.updateNotificacao(id_notificacao, notificacao);
         if (updatedNotificacao == null) {
             throw new ResourceNotFoundException("Nenhuma notificação encontrada com o id: " + id_notificacao);
         }
-        return ResponseEntity.ok(updatedNotificacao);
+        return ResponseEntity.ok(updatedNotificacao); // Retorna 200 com o objeto atualizado
     }
 
     @DeleteMapping("/{id_notificacao}")
-    public ResponseEntity<String> deleteNotificacao(@PathVariable Integer id_notificacao) {
+    public ResponseEntity<Void> deleteNotificacao(@PathVariable Integer id_notificacao) {
         if (notificacaoService.existsById(id_notificacao)) {
             notificacaoService.deleteNotificacao(id_notificacao);
-            return ResponseEntity.ok("Notificação deletada com sucesso.");
+            return ResponseEntity.noContent().build(); // Retorna 204 sem corpo de resposta
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Notificação com o ID " + id_notificacao + " não foi encontrada.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // Retorna 404 se o recurso não for encontrado
         }
     }
 }

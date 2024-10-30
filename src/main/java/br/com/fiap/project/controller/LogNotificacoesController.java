@@ -22,7 +22,10 @@ public class LogNotificacoesController {
     @GetMapping
     public ResponseEntity<List<LogNotificacoes>> getAllLogNotificacoes() {
         List<LogNotificacoes> logNotificacoes = logNotificacoesService.getAllLogNotificacoes();
-        return ResponseEntity.ok(logNotificacoes);
+        if (logNotificacoes == null || logNotificacoes.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); // Retorna 204 se a lista estiver vazia
+        }
+        return ResponseEntity.ok(logNotificacoes); // Retorna 200 com a lista de logs de notificações
     }
 
     @GetMapping("/{id_log}")
@@ -31,37 +34,37 @@ public class LogNotificacoesController {
         if (logNotificacoes == null) {
             throw new ResourceNotFoundException("Não foi encontrado nenhum log com o id: " + id_log);
         }
-        return ResponseEntity.ok(logNotificacoes);
+        return ResponseEntity.ok(logNotificacoes); // Retorna 200 com o log encontrado
     }
 
     @PostMapping
     public ResponseEntity<?> createLogNotificacoes(@Valid @RequestBody LogNotificacoes logNotificacoes, BindingResult result) {
         if (result.hasErrors()) {
-            return ResponseEntity.badRequest().body(result.getAllErrors());
+            return ResponseEntity.badRequest().body(result.getAllErrors()); // Retorna 400 se houver erros de validação
         }
         LogNotificacoes createdLogNotificacoes = logNotificacoesService.createLogNotificacoes(logNotificacoes);
-        return ResponseEntity.ok(createdLogNotificacoes);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdLogNotificacoes); // Retorna 201 com o recurso criado
     }
 
     @PutMapping("/{id_log}")
     public ResponseEntity<?> updateLogNotificacoes(@PathVariable Integer id_log, @Valid @RequestBody LogNotificacoes logNotificacoes, BindingResult result) {
         if (result.hasErrors()) {
-            return ResponseEntity.badRequest().body(result.getAllErrors());
+            return ResponseEntity.badRequest().body(result.getAllErrors()); // Retorna 400 em caso de erros de validação
         }
         LogNotificacoes updatedLogNotificacoes = logNotificacoesService.updateLogNotificacoes(id_log, logNotificacoes);
         if (updatedLogNotificacoes == null) {
             throw new ResourceNotFoundException("Não foi encontrado nenhum log com o id: " + id_log);
         }
-        return ResponseEntity.ok(updatedLogNotificacoes);
+        return ResponseEntity.ok(updatedLogNotificacoes); // Retorna 200 com o objeto atualizado
     }
 
     @DeleteMapping("/{id_log}")
-    public ResponseEntity<String> deleteLogNotificacoes(@PathVariable Integer id_log) {
+    public ResponseEntity<Void> deleteLogNotificacoes(@PathVariable Integer id_log) {
         if (logNotificacoesService.existsById(id_log)) {
             logNotificacoesService.deleteLogNotificacoes(id_log);
-            return ResponseEntity.ok("Log deletado com sucesso.");
+            return ResponseEntity.noContent().build(); // Retorna 204 sem corpo de resposta
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Log com o ID " + id_log + " não foi encontrado.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // Retorna 404 se o recurso não for encontrado
         }
     }
 }

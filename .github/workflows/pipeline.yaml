@@ -32,8 +32,15 @@ jobs:
       - name: Dá build no Maven        
         run: mvn clean install      
       - name: Roda os testes do Maven        
-        run: mvn test  
-
+        run: mvn test
+      
+      # Opcional: Publicar os relatórios de teste
+      - name: Publicar relatórios de teste
+        uses: actions/upload-artifact@v2
+        with:
+          name: relatorios-de-teste
+          path: target/surefire-reports
+      
   dockerize:    
     needs: build    
     runs-on: ubuntu-latest    
