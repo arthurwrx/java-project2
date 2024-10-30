@@ -1,5 +1,6 @@
 package stepdefinitions;
 
+import br.com.fiap.project.model.TipoResiduos;
 import io.cucumber.java.en.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
