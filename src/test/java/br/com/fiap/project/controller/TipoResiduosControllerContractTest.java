@@ -1,22 +1,22 @@
 package br.com.fiap.project.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.github.fge.jackson.JsonLoader;
-import com.github.fge.jsonschema.core.report.ProcessingReport;
-import com.github.fge.jsonschema.main.JsonSchema;
-import com.github.fge.jsonschema.main.JsonSchemaFactory;
+import java.io.File;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-
-import java.io.File;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.github.fge.jackson.JsonLoader;
+import com.github.fge.jsonschema.core.report.ProcessingReport;
+import com.github.fge.jsonschema.main.JsonSchema;
+import com.github.fge.jsonschema.main.JsonSchemaFactory;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -48,7 +48,7 @@ public class TipoResiduosControllerContractTest {
     }
     @Test
     public void testGetTipoResiduosByIdContract() throws Exception {
-        MvcResult result = mockMvc.perform(get("/tipo-residuos/1"))
+        MvcResult result = mockMvc.perform(get("/tipo-residuos/3"))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -82,7 +82,7 @@ public class TipoResiduosControllerContractTest {
     }
     @Test
     public void testPutTipoResiduosByIdContract() throws Exception {
-        MvcResult result = mockMvc.perform(get("/tipo-residuos/1"))
+        MvcResult result = mockMvc.perform(get("/tipo-residuos/3"))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -99,7 +99,7 @@ public class TipoResiduosControllerContractTest {
     }
     @Test
     public void testDeleteTipoResiduosByIdContract() throws Exception {
-        MvcResult result = mockMvc.perform(get("/tipo-residuos/1"))
+        MvcResult result = mockMvc.perform(get("/tipo-residuos/3"))
                 .andExpect(status().isOk())
                 .andReturn();
 

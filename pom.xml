@@ -141,7 +141,6 @@
                 <include>**/CucumberTest.java</include>
             </includes>
                 <systemPropertyVariables>
-            <cucumber.options>--plugin pretty --plugin html:target/cucumber-reports.html</cucumber.options>
                 </systemPropertyVariables>
             </configuration>
             </plugin>
