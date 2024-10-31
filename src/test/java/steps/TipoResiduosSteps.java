@@ -1,10 +1,12 @@
 package steps;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+
 import br.com.fiap.project.model.TipoResiduos;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
@@ -66,6 +68,20 @@ public class TipoResiduosSteps {
     
         // Caso o corpo seja uma string, converte diretamente e faz a verificação
         String responseBody = response.getBody().toString();
-        assertFalse(responseBody.contains(mensagem), "Mensagem de erro não encontrada no corpo da resposta.");
+        assertTrue(responseBody.contains(mensagem), "Mensagem de erro não encontrada no corpo da resposta.");
+
     }
+
+    @Quando("o usuário solicita a exclusão do tipo de resíduo com id {int}")
+    public void o_usuário_solicita_a_exclusão_do_tipo_de_resíduo_com_id(Integer id) {
+        String url = "http://localhost:8080/tipo-residuos/" + id;
+        response = restTemplate.exchange(url, HttpMethod.DELETE, null, String.class);
+    }
+    
+    @Então("o sistema retorna o status de exclusão {int}")
+    public void o_sistema_retorna_o_status_de_exclusão(Integer statusCode) {
+        assertEquals(statusCode, response.getStatusCode().value(), "Status de exclusão não é o esperado");
+
+    }
+
 }

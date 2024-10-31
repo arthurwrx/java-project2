@@ -59,7 +59,7 @@
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>7.11.1</version>
+            <version>7.20.1</version>
             <scope>test</scope>
         </dependency>
         
@@ -67,7 +67,7 @@
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>7.11.1</version>
+            <version>7.20.1</version>
             <scope>test</scope>
         </dependency>
         
@@ -75,7 +75,7 @@
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-spring</artifactId>
-            <version>7.11.1</version>
+            <version>7.20.1</version>
             <scope>test</scope>
         </dependency>
 
@@ -138,8 +138,11 @@
                 <include>**/*Test.java</include>
                 <include>**/*Tests.java</include>
                 <include>**/*Spec.java</include>
-                <include>**/*CucumberTest.java</include>
+                <include>**/CucumberTest.java</include>
             </includes>
+                <systemPropertyVariables>
+            <cucumber.options>--plugin pretty --plugin html:target/cucumber-reports.html</cucumber.options>
+                </systemPropertyVariables>
             </configuration>
             </plugin>
         </plugins>
