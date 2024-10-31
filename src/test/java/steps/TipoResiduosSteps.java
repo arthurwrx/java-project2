@@ -1,12 +1,10 @@
 package steps;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
-
 import br.com.fiap.project.model.TipoResiduos;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
@@ -70,7 +68,4 @@ public class TipoResiduosSteps {
         String responseBody = response.getBody().toString();
         assertFalse(responseBody.contains(mensagem), "Mensagem de erro não encontrada no corpo da resposta.");
     }
-    
-    
-
 }
